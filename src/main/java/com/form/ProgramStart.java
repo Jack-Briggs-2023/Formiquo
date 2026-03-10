@@ -1,13 +1,12 @@
 package com.form;
 
 // Imports
-import java.util.prefs.Preferences;
-
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Font;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -16,50 +15,43 @@ public class ProgramStart extends Application {
     double screenWidth = screenBounds.getWidth();
     double screenHeight = screenBounds.getHeight();
 
-    Preferences appPreferences = Preferences.userNodeForPackage(ProgramStart.class);
+
 
     @Override
     public void start(Stage primaryStage) {
         // Stage (window) setup
         primaryStage.setTitle("Formiquo");
-        boolean isFirstLaunch = appPreferences.getBoolean("isFirstLaunch", true);
+        boolean isFirstLaunch = Assets.appPreferences.getBoolean("isFirstLaunch", true); // get the preference isFirstLaunch
 
-        StackPane root = new StackPane(); // Root layout container
+        BorderPane primarRoot = new BorderPane(); // Root layout container
+        Assets.mainWindowRoot = primarRoot; // adds the current root to mainWindowRoot for future reference
+        Assets.setFont(Assets.mainWindowRoot, "/com/form/RobotoFonts/Roboto_Condensed-medium.ttf", 14);
 
-        // Load custom font from resources
-        Font defaultFont = Font.loadFont(
-                getClass().getResourceAsStream("/com/form/RobotoFonts/Roboto_Condensed-medium.ttf"),
-                14
-        );
-
-        // If font loads successfully, override default font styling
-        if (defaultFont != null) {
-            root.setStyle("-fx-font-family: '" + defaultFont.getFamily() + "'; -fx-font-size: 14px;");
-        } else {
-            System.out.println("Custom font failed to load.");
-        }
-
-        
-        Scene scene = new Scene(root, (screenWidth / 5), (screenHeight / 5)); // Scene with root and size
+        Scene scene = new Scene(Assets.mainWindowRoot, (screenWidth / 3), (screenHeight / 3)); // Create scene with root and size
         primaryStage.setScene(scene);
 
+
         if (isFirstLaunch) {
-            // System.out.println("First launch detected");
-            // appPreferences.putBoolean("isFirstLaunch", false);
-            // Button resetButton = new Button("First Time");
-            // resetButton.setOnAction(event -> {
-            //     System.out.println("Button was pressed");
-            //     appPreferences.putBoolean("isFirstLaunch", true);
-            // });
-            // root.getChildren().add(resetButton);
-            // ADD CLASS CALL HERE
+            Assets.appPreferences.putBoolean("isFirstLaunch", false);
+            Button resetButton = new Button("First Time");
+            resetButton.setOnAction(event -> {
+                Assets.appPreferences.putBoolean("isFirstLaunch", true);
+            });
+            Assets.mainWindowRoot.setCenter(resetButton);
+            
+            // Adds objecets to te welcome window
+            Text welcomeTextTitle = new Text("Welcome to Formiquo\n System Settings");
+            Assets.mainWindowRoot.setCenter(welcomeTextTitle);
+            Button continueToMainPageButton = new Button("Continue to Main Menu");
+            continueToMainPageButton.setOnAction(event -> {
+            });
+        Assets.mainWindowRoot.setBottom(continueToMainPageButton);
         } else {
-        // Button resetButton = new Button("Reset");
-        //     resetButton.setOnAction(event -> {
-        //         System.out.println("Button was pressed");
-        //         appPreferences.putBoolean("isFirstLaunch", true);
-        //     });
-        //     root.getChildren().add(resetButton);
+            Button resetButton = new Button("Reset");
+            resetButton.setOnAction(event -> {
+                Assets.appPreferences.putBoolean("isFirstLaunch", true);
+            });
+            Assets.mainWindowRoot.setCenter(resetButton);
             // ADD CLASS CALL HERE
         }
 
