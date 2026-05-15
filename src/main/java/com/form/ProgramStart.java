@@ -2,6 +2,7 @@ package com.form;
 
 // Imports
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,7 +21,7 @@ public class ProgramStart extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Stage (window) setup
-        primaryStage.setTitle("Formiquo");
+        // primaryStage.setTitle("Formiquo"); // Sets stage name
         boolean isFirstLaunch = Assets.appPreferences.getBoolean("isFirstLaunch", true); // get the preference isFirstLaunch
 
         BorderPane primarRoot = new BorderPane(); // Root layout container
@@ -30,23 +31,33 @@ public class ProgramStart extends Application {
         Scene scene = new Scene(Assets.mainWindowRoot, (screenWidth / 3), (screenHeight / 3)); // Create scene with root and size
         primaryStage.setScene(scene);
 
-
-        if (isFirstLaunch) {
+        // If this launch is the first launch of the app
+        if (isFirstLaunch) { // True
             Assets.appPreferences.putBoolean("isFirstLaunch", false);
-            Button resetButton = new Button("First Time");
-            resetButton.setOnAction(event -> {
-                Assets.appPreferences.putBoolean("isFirstLaunch", true);
-            });
-            Assets.mainWindowRoot.setCenter(resetButton);
+            // Button resetButton = new Button("First Time");
+            // resetButton.setOnAction(event -> {
+            //     Assets.appPreferences.putBoolean("isFirstLaunch", true);
+            // });
+            // Assets.mainWindowRoot.setCenter(resetButton);
+            // BorderPane.setAlignment(resetButton, Pos.CENTER);
             
-            // Adds objecets to te welcome window
-            Text welcomeTextTitle = new Text("Welcome to Formiquo\n System Settings");
+            // Adds objects to te welcome window
+            //
+            // Welcome text title
+            Text welcomeTextTitle = new Text("Welcome to Formiquo");
             Assets.mainWindowRoot.setCenter(welcomeTextTitle);
+            BorderPane.setAlignment(welcomeTextTitle, Pos.CENTER);
+            // Text that shows how to change the settings
+            Text setSettingsText = new Text("System Settings");
+            Assets.mainWindowRoot.setCenter(setSettingsText);
+            BorderPane.setAlignment(setSettingsText, Pos.CENTER);
             Button continueToMainPageButton = new Button("Continue to Main Menu");
             continueToMainPageButton.setOnAction(event -> {
+
             });
-        Assets.mainWindowRoot.setBottom(continueToMainPageButton);
-        } else {
+            Assets.mainWindowRoot.setBottom(continueToMainPageButton);
+            BorderPane.setAlignment(continueToMainPageButton, Pos.CENTER);
+        } else { // False
             Button resetButton = new Button("Reset");
             resetButton.setOnAction(event -> {
                 Assets.appPreferences.putBoolean("isFirstLaunch", true);

@@ -31,7 +31,7 @@ public class Assets {
 
     public static void setLightOrDarkMode(Boolean isLightMode) {
         if (isLightMode) {
-
+            
         } else {
 
         }
