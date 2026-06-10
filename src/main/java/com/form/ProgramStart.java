@@ -1,76 +1,28 @@
 package com.form;
 
-// Imports
 import javafx.application.Application;
-import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class ProgramStart extends Application {
-    Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-    double screenWidth = screenBounds.getWidth();
-    double screenHeight = screenBounds.getHeight();
-
-
 
     @Override
     public void start(Stage primaryStage) {
-        // Stage (window) setup
-        // primaryStage.setTitle("Formiquo"); // Sets stage name
-        boolean isFirstLaunch = Assets.appPreferences.getBoolean("isFirstLaunch", true); // get the preference isFirstLaunch
+        WindowManager.initialize(primaryStage); // Register the stage with WindowManager
 
-        BorderPane primarRoot = new BorderPane(); // Root layout container
-        Assets.mainWindowRoot = primarRoot; // adds the current root to mainWindowRoot for future reference
-        Assets.setFont(Assets.mainWindowRoot, "/com/form/RobotoFonts/Roboto_Condensed-medium.ttf", 14);
+        boolean isFirstLaunch = Assets.appPreferences.getBoolean("isFirstLaunch", true); // Check if this is the first launch
 
-        Scene scene = new Scene(Assets.mainWindowRoot, (screenWidth / 3), (screenHeight / 3)); // Create scene with root and size
-        primaryStage.setScene(scene);
-
-        // If this launch is the first launch of the app
-        if (isFirstLaunch) { // True
-            Assets.appPreferences.putBoolean("isFirstLaunch", false);
-            // Button resetButton = new Button("First Time");
-            // resetButton.setOnAction(event -> {
-            //     Assets.appPreferences.putBoolean("isFirstLaunch", true);
-            // });
-            // Assets.mainWindowRoot.setCenter(resetButton);
-            // BorderPane.setAlignment(resetButton, Pos.CENTER);
-            
-            // Adds objects to te welcome window
-            //
-            // Welcome text title
-            Text welcomeTextTitle = new Text("Welcome to Formiquo");
-            Assets.mainWindowRoot.setCenter(welcomeTextTitle);
-            BorderPane.setAlignment(welcomeTextTitle, Pos.CENTER);
-            // Text that shows how to change the settings
-            Text setSettingsText = new Text("System Settings");
-            Assets.mainWindowRoot.setCenter(setSettingsText);
-            BorderPane.setAlignment(setSettingsText, Pos.CENTER);
-            Button continueToMainPageButton = new Button("Continue to Main Menu");
-            continueToMainPageButton.setOnAction(event -> {
-
-            });
-            Assets.mainWindowRoot.setBottom(continueToMainPageButton);
-            BorderPane.setAlignment(continueToMainPageButton, Pos.CENTER);
-        } else { // False
-            Button resetButton = new Button("Reset");
-            resetButton.setOnAction(event -> {
-                Assets.appPreferences.putBoolean("isFirstLaunch", true);
-            });
-            Assets.mainWindowRoot.setCenter(resetButton);
-            // ADD CLASS CALL HERE
+        // Route to the correct starting window
+        if (isFirstLaunch) {
+            WindowManager.switchTo(new WelcomeWindow()); // First launch — show welcome/onboarding
+        } else {
+            WindowManager.switchTo(new MainMenuWindow()); // Returning user — go straight to main menu
         }
-
 
         primaryStage.show(); // Display the stage
     }
 
     public static void main(String[] args) {
-        launch(args); // Launches the JavaFX application
+        launch(args); // Launch the JavaFX application
     }
+
 }

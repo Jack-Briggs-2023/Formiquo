@@ -1,0 +1,12 @@
+com/form/SettingsWindow.class
+com/form/MainMenuWindow.class
+com/form/WelcomeWindow.class
+com/form/JobEntry.class
+com/form/ResumeFormWindow.class
+com/form/ProgramStart.class
+com/form/ResumeManager.class
+com/form/StartWindow.class
+com/form/PdfExporter.class
+com/form/ResumeData.class
+com/form/WindowManager.class
+com/form/Assets.class

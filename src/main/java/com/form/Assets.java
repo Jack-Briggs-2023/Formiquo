@@ -2,20 +2,27 @@ package com.form;
 
 import java.util.prefs.Preferences;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
+import javafx.stage.Screen;
 
 public class Assets {
 
     static BorderPane mainWindowRoot;
-    static Preferences appPreferences = Preferences.userNodeForPackage(Assets.class); // add saving preferences to class
+    static Preferences appPreferences = Preferences.userNodeForPackage(Assets.class); // app preferences (persists between launches)
 
-    // universal class that sets the font
-    // Will defualt to universal font if font path returns error
-    public static void setFont(BorderPane root, String FontFileName, int size) {
+    // Shared window size — calculated once from screen bounds, used by all windows
+    static Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+    static double windowWidth = screenBounds.getWidth() / 3;
+    static double windowHeight = screenBounds.getHeight() / 3;
+
+    // Universal font setter
+    // Defaults to Roboto Condensed medium if fontFileName is null or empty
+    public static void setFont(BorderPane root, String fontFileName, int size) {
         String fontPath;
-        if (FontFileName != null && !FontFileName.isEmpty()) {
-            fontPath = FontFileName;
+        if (fontFileName != null && !fontFileName.isEmpty()) {
+            fontPath = fontFileName;
         } else {
             fontPath = "/com/form/RobotoFonts/Roboto_Condensed-medium.ttf";
         }
@@ -23,22 +30,30 @@ public class Assets {
 
         // If font loads successfully, override default font styling
         if (defaultFont != null) {
-            root.setStyle("-fx-font-family: '" + defaultFont.getFamily() + "'; -fx-font-size: " + size + "px;"); // Sets default font, to defaultFont, and size
+            root.setStyle("-fx-font-family: '" + defaultFont.getFamily() + "'; -fx-font-size: " + size + "px;"); // Sets default font and size
         } else {
             System.out.println("Custom font failed to load.");
         }
     }
 
+    // Applies light or dark theme by swapping the scene's CSS stylesheet
+    // Font settings from setFont() are unaffected — inline styles beat stylesheets in JavaFX
     public static void setLightOrDarkMode(Boolean isLightMode) {
-        if (isLightMode) {
-            
+        javafx.scene.Scene scene = WindowManager.getCurrentScene();
+        if (scene == null) return; // No scene active yet — preference is saved and applied on next switchTo
+
+        scene.getStylesheets().clear(); // Remove any previously applied theme
+
+        String themePath = isLightMode
+            ? "/com/form/themes/light-theme.css"
+            : "/com/form/themes/dark-theme.css";
+
+        java.net.URL themeUrl = Assets.class.getResource(themePath);
+        if (themeUrl != null) {
+            scene.getStylesheets().add(themeUrl.toExternalForm());
         } else {
-
+            System.out.println("Theme file not found: " + themePath);
         }
-
     }
-
-
-
 
 }

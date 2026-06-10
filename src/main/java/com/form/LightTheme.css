@@ -1,0 +1,112 @@
+/* Formiquo — Light Theme
+   Place this file at: src/main/resources/com/form/themes/light-theme.css */
+
+/* --- Root and backgrounds --- */
+.root {
+    -fx-background-color: #F5F5F5;
+    -fx-base: #E8E8E8;
+    -fx-control-inner-background: #FFFFFF;
+}
+
+/* --- Text nodes (javafx.scene.text.Text) --- */
+.text {
+    -fx-fill: #1A1A1A;
+}
+
+/* --- Labels --- */
+.label {
+    -fx-text-fill: #1A1A1A;
+}
+
+/* --- Buttons --- */
+.button {
+    -fx-background-color: #E0E0E0;
+    -fx-text-fill: #1A1A1A;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #CCCCCC;
+}
+
+.button:pressed {
+    -fx-background-color: #B8B8B8;
+}
+
+/* --- Text fields --- */
+.text-field {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #1A1A1A;
+    -fx-prompt-text-fill: #AAAAAA;
+    -fx-border-color: #CCCCCC;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+
+.text-field:focused {
+    -fx-border-color: #555555;
+}
+
+/* --- Radio buttons --- */
+.radio-button {
+    -fx-text-fill: #1A1A1A;
+}
+
+.radio-button .radio {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #AAAAAA;
+}
+
+.radio-button:selected .dot {
+    -fx-background-color: #1A1A1A;
+}
+
+/* --- Checkboxes --- */
+.check-box {
+    -fx-text-fill: #1A1A1A;
+}
+
+.check-box .box {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #AAAAAA;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: #1A1A1A;
+}
+
+/* --- Date picker --- */
+.date-picker .text-field {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #1A1A1A;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #E0E0E0;
+}
+
+/* --- Scroll pane --- */
+.scroll-pane {
+    -fx-background-color: #F5F5F5;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: #F5F5F5;
+}
+
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: #E8E8E8;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #BBBBBB;
+    -fx-background-radius: 4;
+}
+
+/* --- Separator --- */
+.separator > .line {
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1 0 0 0;
+}
