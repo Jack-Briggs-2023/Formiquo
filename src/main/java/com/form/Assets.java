@@ -45,8 +45,8 @@ public class Assets {
         scene.getStylesheets().clear(); // Remove any previously applied theme
 
         String themePath = isLightMode
-            ? "/com/form/themes/light-theme.css"
-            : "/com/form/themes/dark-theme.css";
+            ? "/com/form/Themes/LightTheme.css"
+            : "/com/form/Themes/DarkTheme.css";
 
         java.net.URL themeUrl = Assets.class.getResource(themePath);
         if (themeUrl != null) {

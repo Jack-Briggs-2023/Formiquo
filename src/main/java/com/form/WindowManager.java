@@ -17,8 +17,13 @@ public class WindowManager {
     // Builds the scene, stores it, swaps it on the stage, then calls onShow()
     public static void switchTo(StartWindow window) {
         Scene newScene = window.buildScene();
+
         currentScene = newScene;          // Store before onShow so setLightOrDarkMode can reach it
         primaryStage.setScene(newScene);
+
+        // primaryStage.setWidth(currentScene.getWidth());
+        // primaryStage.setHeight(currentScene.getHeight());
+
         window.onShow();
     }
 

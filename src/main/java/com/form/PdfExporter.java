@@ -193,14 +193,14 @@ public class PdfExporter {
         return (LINE_HEIGHT * 1.4f)        // section title line
              + 4                           // gap after title
              + (items.size() * LINE_HEIGHT) // one line per item
-             + SECTION_GAP;
+            + SECTION_GAP;
     }
 
     private float estimateEntryBlockHeight(JobEntry entry) {
         return LINE_HEIGHT                         // job title / employer line
              + LINE_HEIGHT                         // date line
              + (entry.bullets.size() * LINE_HEIGHT) // one line per bullet
-             + ENTRY_GAP;
+            + ENTRY_GAP;
     }
 
     // -------------------------------------------------------------------------
