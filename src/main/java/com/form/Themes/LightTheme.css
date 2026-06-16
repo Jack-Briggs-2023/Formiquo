@@ -110,3 +110,15 @@
     -fx-border-color: #CCCCCC;
     -fx-border-width: 1 0 0 0;
 }
+
+/* .button {
+    -fx-background-color: #E0E0E0;
+    -fx-text-fill: #1A1A1A;
+
+    -fx-background-radius: 4;
+
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+
+    -fx-background-insets: 0;
+} */

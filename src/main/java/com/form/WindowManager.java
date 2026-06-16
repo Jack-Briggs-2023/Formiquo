@@ -23,7 +23,8 @@ public class WindowManager {
 
         // primaryStage.setWidth(currentScene.getWidth());
         // primaryStage.setHeight(currentScene.getHeight());
-
+        boolean isLightMode = Assets.appPreferences.getBoolean("isLightMode", true);
+        Assets.setLightOrDarkMode(isLightMode);
         window.onShow();
     }
 

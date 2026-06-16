@@ -133,3 +133,15 @@
     -fx-border-color: #444444;
     -fx-border-width: 1 0 0 0;
 }
+
+/* .button {
+    -fx-background-color: #3C3C3C;
+    -fx-text-fill: #E8E8E8;
+
+    -fx-background-radius: 4;
+
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+
+    -fx-background-insets: 0;
+} */

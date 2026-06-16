@@ -74,8 +74,8 @@ public class MainMenuWindow implements StartWindow {
     public void onShow() {
         WindowManager.getStage().setTitle("Formiquo - Main Menu");
         // Apply saved theme — returning users skip WelcomeWindow so theme must be applied here
-        boolean isLightMode = Assets.appPreferences.getBoolean("isLightMode", true);
-        Assets.setLightOrDarkMode(isLightMode);
+        // boolean isLightMode = Assets.appPreferences.getBoolean("isLightMode", true); // removed because added to the WindowManager.java
+        // Assets.setLightOrDarkMode(isLightMode);
     }
 
 }
